@@ -19,6 +19,8 @@ contract Bank {
     function balance() returns (uint){
         return value;
     }
+    
+    function loan() returns (bool); // Abstract method
 }
 
 contract MyFirstContract is Bank(110){
@@ -41,5 +43,9 @@ contract MyFirstContract is Bank(110){
     function getAge() returns (int){
         return age;
     }
-    
+
+    function loan() returns (bool){
+        return true;
+    } // Abstract method implementation
+
 }
