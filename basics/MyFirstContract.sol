@@ -4,6 +4,10 @@ contract Bank {
     uint private value;
     string internal other;
     
+    function Bank(uint initialAmount){
+        value = initialAmount;
+    }
+    
     function deposit(uint amount){
         value += amount;
     }
@@ -17,7 +21,7 @@ contract Bank {
     }
 }
 
-contract MyFirstContract is Bank{
+contract MyFirstContract is Bank(110){
     string private name;
     int private age;
     
