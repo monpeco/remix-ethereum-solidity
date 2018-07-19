@@ -1,6 +1,11 @@
 pragma solidity ^0.4.0;
 
-contract Bank {
+interface Regulator {
+    function checkValue(uint amount) returns (bool);
+    function loan() returns (bool);
+}
+
+contract Bank is Regulator{
     uint private value;
     string internal other;
     
@@ -13,14 +18,25 @@ contract Bank {
     }
     
     function withdraw(uint amount){
-        value -= amount;
+        if (checkValue(amount)){
+            value -= amount;
+        }
     }
     
     function balance() returns (uint){
         return value;
     }
     
-    function loan() returns (bool); // Abstract method
+    //function lending() returns (bool); // Abstract method
+    
+    function checkValue(uint amount) returns (bool) {
+        return value >= amount;
+    }
+    
+    function loan() returns (bool){
+        return value > 0;
+    }
+
 }
 
 contract MyFirstContract is Bank(110){
@@ -44,8 +60,8 @@ contract MyFirstContract is Bank(110){
         return age;
     }
 
-    function loan() returns (bool){
-        return true;
-    } // Abstract method implementation
+    //function lending() returns (bool){
+    //    return true;
+    //} // Abstract method implementation
 
 }
