@@ -21,11 +21,11 @@ contract Bank is Regulator{
         _;
     }
     
-    function deposit(uint amount) ownerFunc{
+    function deposit(uint amount) internal ownerFunc{
         value += amount;
     }
     
-    function withdraw(uint amount) ownerFunc{
+    function withdraw(uint amount) private ownerFunc{
         if (checkValue(amount)){
             value -= amount;
         }
@@ -72,4 +72,22 @@ contract MyFirstContract is Bank(110){
     //    return true;
     //} // Abstract method implementation
 
+}
+
+contract TestThrow {
+    function testAssert(){
+        assert(false);      //validation input in runtime
+    }
+    
+    function testRequire(){
+        require(2 == 1);    //parameter require
+    }
+    
+    function testRevert(){
+        revert();
+    }
+    
+    function testThrow(){
+        throw;
+    }
 }
